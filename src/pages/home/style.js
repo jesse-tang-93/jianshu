@@ -95,6 +95,50 @@ export const ListInfo = styled.div`
      height: 50px;
    }
  `
+ export const DownQcoder= styled.div`
+  box-sizing:border-box;
+  margin-bottom: 30px;
+  padding: 10px 22px;
+  width: 100%;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  background-color: #fff;
+  position:relative;
+  .qcoder-img-min{
+    width:60px;
+    height:60px;
+    vertical-align: middle;
+  }
+  .info{
+    display:inline-block;
+    margin-left:8px;
+    vertical-align: middle;
+  }
+  .qcoder-box{
+    background:#fff;
+    box-sizing: border-box;
+    padding: 10px;
+    position:absolute;
+    top:-185px;
+    width:180px;
+    height:180px;
+    border:1px solid #333;
+    border-radius:3px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    img{
+      max-width:100%;
+    }
+  }
+  .down-title{
+    font-size: 13px;
+    color: #333;
+  }
+  .down-text{
+    margin-top: 4px;
+    font-size: 13px;
+    color: #999;
+  }
+ `
  /**
  *Writer ui
  */

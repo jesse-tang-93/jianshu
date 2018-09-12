@@ -19,6 +19,8 @@ export const Nav = style.div`
   width:960px;
   margin:0 auto;
   height:100%;
+  padding-right:60px;
+  box-sizing:border-box;
 `;
 export const NavItem =style.div`
   line-height:56px;
