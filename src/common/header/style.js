@@ -96,6 +96,7 @@ export const SearchTitle = style.div`
 `;
 export const SearchInfo = style.div`
   position:absolute;
+  z-index:3;
   left:0;
   top:56px;
   width:240px;
@@ -113,8 +114,7 @@ export const SearchInfoSwitch = style.span`
     font-size:12px;
     margin-right:2px;
     transition: all .2s ease-in;
-    transform: rotate(0deg);
-    transfrom-origin:center center;
+    transform-origin:center center;
   }
 `;
 export const SearchInfoItem = style.a`

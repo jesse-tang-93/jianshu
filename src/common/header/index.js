@@ -40,8 +40,8 @@ class Header extends Component{
         >
          <SearchTitle>
            热门搜索
-           <SearchInfoSwitch onClick={()=>handleChangePage(page,totalPage)}>
-             <i ref={()=>{}} className="iconfont spin">&#xe851;</i>换一批
+           <SearchInfoSwitch onClick={()=>handleChangePage(page,totalPage,this.spinIcon )}>
+             <i ref={(icon)=>{this.spinIcon = icon }} className="iconfont spin">&#xe851;</i>换一批
            </SearchInfoSwitch>
          </SearchTitle>
          <div>
@@ -54,7 +54,7 @@ class Header extends Component{
     }
   }
   render(){
-    const {focused,handInputFocus,handleInputBlur} =this.props
+    const {focused,handInputFocus,handleInputBlur, list} =this.props
     return (
       <HeaderWrapper>
         <Logo/>
@@ -73,7 +73,7 @@ class Header extends Component{
             >
               <NavSearch
                 className={focused ? 'focused' : ''}
-                onFocus={handInputFocus}
+                onFocus={()=>{handInputFocus(list)}}
                 onBlur={handleInputBlur}>
               </NavSearch>
             </CSSTransition>
@@ -104,8 +104,10 @@ const mapStateToProps = (state)=>{
 }
 const mapDispatchToProps =(dispatch)=>{
   return {
-    handInputFocus(){
-      dispatch(actionCreators.getList())
+    handInputFocus(list){
+      if (list.size === 0) {
+        dispatch(actionCreators.getList())
+      }
       dispatch(actionCreators.searchFocus())
     },
     handleInputBlur(){
@@ -117,7 +119,15 @@ const mapDispatchToProps =(dispatch)=>{
     handleMouseLeave(){
       dispatch(actionCreators.mouseLeave())
     },
-    handleChangePage(page,totalPage){
+    handleChangePage(page,totalPage,spin){
+      let originAngle = spin.style.transform.replace(/[^0-9]/ig, '')
+      if(originAngle){
+        originAngle = parseInt(originAngle, 10)
+      }else {
+        originAngle =  0
+      }
+      spin.style.transform = 'rotate('+(originAngle +360)+'deg)'
+      console.log(originAngle)
       console.log(page,totalPage)
       if(page<totalPage){
         dispatch(actionCreators.changePage(page+1))
