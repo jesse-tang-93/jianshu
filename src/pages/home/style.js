@@ -1,5 +1,18 @@
 import styled from 'styled-components'
 
+export const BackTop = styled.div`
+  position:fixed;
+  width:60px;
+  height:60px;
+  line-height:60px;
+  text-align:center;
+  border:1px solid #ccc;
+  right:100px;
+  bottom:100px;
+  font-size:13px;
+  color:#a3a3a3;
+  cursor:pointer;
+`
 export const HomeWrapper = styled.div`
   width:960px;
   margin:0 auto;

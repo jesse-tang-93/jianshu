@@ -14,9 +14,13 @@ import "slick-carousel/slick/slick-theme.css";
 import {
   HomeWrapper,
   HomeLeft,
-  HomeRight
+  HomeRight,
+  BackTop
 } from './style'
 class Home extends Component {
+  handleScrollTop(){
+    window.scrollTo(0,0)
+  }
   render(){
     var settings = {
       autoplay: true,
@@ -40,18 +44,41 @@ class Home extends Component {
           <Recommend/>
           <Writer/>
         </HomeRight>
+        {
+          this.props.showScroll ? <BackTop onClick={this.handleScrollTop}>回到顶部</BackTop> : null
+        }
+
       </HomeWrapper>
     )
   }
   componentDidMount(){
     this.props.getHomeData()
+    this.bindEvents()
+  }
+  bindEvents(){
+    window.addEventListener('scroll',this.props.changeScrollTopShow) // 组件移除的时候要把绑定在window上的事件移除
+  }
+  componentWillUnmount(){
+    window.removeEventListener('scroll',this.props.changeScrollTopShow)
+  }
+}
+const mapState =(state)=>{
+  return {
+    showScroll:state.getIn(["home","showScroll"])
   }
 }
 const mapDispatchToProps = (dispatch)=>{
   return {
     getHomeData(){
       dispatch(actionCreators.getHomeInfo())
+    },
+    changeScrollTopShow(){
+      if(document.documentElement.scrollTop > 100){
+        dispatch(actionCreators.toggleTopShow(true))
+      }else{
+        dispatch(actionCreators.toggleTopShow(false))
+      }
     }
   }
 }
-export default connect(null,mapDispatchToProps)(Home)
+export default connect(mapState,mapDispatchToProps)(Home)

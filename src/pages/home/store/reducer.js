@@ -5,7 +5,8 @@ const defaultState =fromJS({
   topicList:[],
   articleList: [],
   recommendImg:[],
-  articlePage:1
+  articlePage:1,
+  showScroll: false
 })
 // 在reducer中时刻要注意如果需要设置的值传过来的是js对象，要用fromJS方法转化为immutable对象
 export default (state=defaultState, action)=>{
@@ -15,14 +16,16 @@ export default (state=defaultState, action)=>{
         topicList:action.topicList,
         articleList:action.articleList,
         recommendImg:action.recommendImg
-      })
+      });
     case constants.ADD_HOME_LIST:
        console.log(action)
        // return state.set("articleList",state.get('articleList').concat(action.list))//concat 追加
        return state.merge({
          articleList: state.get('articleList').concat(action.list),
          articlePage: action.page + 1
-       })
+       });
+    case constants.TOGGLE_SCROLL_TOP:
+       return state.set("showScroll",action.show)
     default:
       return state
   }
