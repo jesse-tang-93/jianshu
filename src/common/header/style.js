@@ -5,7 +5,7 @@ export const HeaderWrapper = style.div`
   height:56px;
   border-bottom:1px solid #f0f0f0;
 `;
-export const Logo = style.a.attrs({href: './'})`
+export const Logo = style.div`
   position:absolute;
   top:0;
   left:0;
@@ -27,6 +27,10 @@ export const NavItem =style.div`
   padding:0 15px;
   fonst-size:17px;
   colot:#333;
+  a{
+    text-decoration: none;
+    color:#333;
+  }
   &.left{
     float:left;
   }

@@ -1,11 +1,11 @@
-import React,{ Component } from 'react'
+import React,{ PureComponent } from 'react'
 import {connect} from 'react-redux'
 import{
   RecommendList,
   RecommendItem,
   DownQcoder
 } from '../style'
-class Recommend extends Component {
+class Recommend extends PureComponent {
   constructor(props){
     super(props)
     this.state={
