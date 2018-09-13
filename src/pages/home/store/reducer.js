@@ -1,56 +1,28 @@
 // 将state变为immutable对象
 import  { fromJS } from 'immutable'
-
+import * as constants from './constants'
 const defaultState =fromJS({
-  topicList:[{
-    id: 1,
-    title: '社会热点',
-    imgUrl: 'https://upload.jianshu.io/collections/images/21/20120316041115481.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64'
-  },{
-    id:2,
-    title:'手绘',
-    imgUrl: 'https://upload.jianshu.io/collections/images/283250/%E6%BC%AB%E7%94%BB%E4%B8%93%E9%A2%98.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64'
-  }],
-  articleList: [{
-    id:1,
-    title:'我快30了，坐在自行车上真的笑不出来',
-    desc:'文/婉兮 1 结婚第五年的某个傍晚，阿燕一言不发地把离婚协议扔到了老公面前。 那个沉醉在小视频中的男人不抬头也不应声，5分钟后才用右手的食指和中...',
-    imgUrl: 'https://upload-images.jianshu.io/upload_images/4125158-91cbd7c734127c6d.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240'
-  },{
-    id:2,
-    title:'一个35岁已婚女人的忠告：无论婚前还是婚后，女人都要做到这一点',
-    desc:'01 有读者给我留言，她说，她今年35岁。她和老公结婚十二年了，却发现老公前阵子和他的初恋女友旧情复燃了。 她说，在此之前，他们的感情一直不错。...',
-    imgUrl:'https://upload-images.jianshu.io/upload_images/2023205-6f57641677843ecd.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240'
-  },{
-    id:3,
-    title:'一个35岁已婚女人的忠告：无论婚前还是婚后，女人都要做到这一点',
-    desc:'01 有读者给我留言，她说，她今年35岁。她和老公结婚十二年了，却发现老公前阵子和他的初恋女友旧情复燃了。 她说，在此之前，他们的感情一直不错。...',
-    imgUrl:'https://upload-images.jianshu.io/upload_images/2023205-6f57641677843ecd.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240'
-  },{
-    id:4,
-    title:'一个35岁已婚女人的忠告：无论婚前还是婚后，女人都要做到这一点',
-    desc:'01 有读者给我留言，她说，她今年35岁。她和老公结婚十二年了，却发现老公前阵子和他的初恋女友旧情复燃了。 她说，在此之前，他们的感情一直不错。...',
-    imgUrl:'https://upload-images.jianshu.io/upload_images/2023205-6f57641677843ecd.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240'
-  }],
-  recommendImg:[{
-    id:1,
-    imgUrl:'https://cdn2.jianshu.io/assets/web/banner-s-3-7123fd94750759acf7eca05b871e9d17.png'
-  },{
-    id:2,
-    imgUrl:'https://cdn2.jianshu.io/assets/web/banner-s-4-b70da70d679593510ac93a172dfbaeaa.png'
-  },{
-    id:3,
-    imgUrl:'https://cdn2.jianshu.io/assets/web/banner-s-7-1a0222c91694a1f38e610be4bf9669be.png'
-  },{
-    id:4,
-    imgUrl:'https://cdn2.jianshu.io/assets/web/banner-s-5-4ba25cf5041931a0ed2062828b4064cb.png'
-  },{
-    id:5,
-    imgUrl:'https://cdn2.jianshu.io/assets/web/banner-s-6-c4d6335bfd688f2ca1115b42b04c28a7.png'
-  }]
+  topicList:[],
+  articleList: [],
+  recommendImg:[],
+  articlePage:1
 })
+// 在reducer中时刻要注意如果需要设置的值传过来的是js对象，要用fromJS方法转化为immutable对象
 export default (state=defaultState, action)=>{
   switch (action.type){
+    case constants.CHANGE_HOME_DATA:
+      return state.merge({
+        topicList:action.topicList,
+        articleList:action.articleList,
+        recommendImg:action.recommendImg
+      })
+    case constants.ADD_HOME_LIST:
+       console.log(action)
+       // return state.set("articleList",state.get('articleList').concat(action.list))//concat 追加
+       return state.merge({
+         articleList: state.get('articleList').concat(action.list),
+         articlePage: action.page + 1
+       })
     default:
       return state
   }

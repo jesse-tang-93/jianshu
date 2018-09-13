@@ -83,6 +83,17 @@ export const ListInfo = styled.div`
     color: #999;
   }
  `
+export const LoadMore = styled.div`
+  margin:30px auto;
+  width:100%;
+  height:40px;
+  line-height:40px;
+  background:#a5a5a5;
+  text-align:center;
+  border-radius:20px;
+  color:#fff;
+  cursor:pointer;
+`
  //RecommendList
  export const RecommendList = styled.div`
    padding-top:30px;

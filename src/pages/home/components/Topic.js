@@ -24,9 +24,6 @@ class Topic extends Component {
       </TopicWrapper>
     )
   }
-  componentDidMount(){
-    console.log(this.props.topicList)
-  }
 }
 const mapStateToProps =  (state)=>{
   return {

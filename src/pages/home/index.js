@@ -1,4 +1,6 @@
 import React,{ Component } from 'react'
+import {connect} from 'react-redux'
+import {actionCreators } from './store'
 // 子组件
 import Topic from './components/Topic'
 import List from './components/List'
@@ -14,7 +16,6 @@ import {
   HomeLeft,
   HomeRight
 } from './style'
-
 class Home extends Component {
   render(){
     var settings = {
@@ -42,5 +43,15 @@ class Home extends Component {
       </HomeWrapper>
     )
   }
+  componentDidMount(){
+    this.props.getHomeData()
+  }
 }
-export default Home
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    getHomeData(){
+      dispatch(actionCreators.getHomeInfo())
+    }
+  }
+}
+export default connect(null,mapDispatchToProps)(Home)
