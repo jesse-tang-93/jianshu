@@ -75,7 +75,7 @@ class Header extends Component{
           <SearchWrapper>
             <CSSTransition
               in={focused}
-              timeout={500}
+              timeout={ 500 }
               classNames={"slide"}
             >
               <NavSearch
